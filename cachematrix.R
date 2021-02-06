@@ -1,13 +1,29 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The first function makeCacheMatrix creates a special matrix which is really a 
+## list to: set the value of the matrix; get the value of the matrix; set the 
+## inverse of the matrix; and get the value of the inverse.
+## and the "cacheSolve" function works in conjunction with the makeCacheMatrix
+## and it computes the inverse of the matrix. But it first checks if the inverse 
+## has been cached already, and if so it skips the computation and brings the 
+## cached data. if it hasnt been cached, the function calculates and caches
+## it via the setInverse() function
 
-## Write a short comment describing this function
+
+
+## this first function takes an invertible matrix as argument x
+## The first action of this function is to create an empty variable where the
+## inverse of the matrix will be stored when it is calculated.
+## then we have an interior function that sets the value of the matrix x when you
+## wish to change it. And when you change the value with the interior set function
+## the cached inverse gets reset to NULL
+## then the next interior function just gets the value of the matrix
+## the next one sets the value of the inverse and caches it
+## and the last one displays the inverse if it has been cached, or NULL if it hasn't
 
 makeCacheMatrix <- function(x = matrix()) {
-    the_inv <- NULL
-    
+    the_inv <- NULL                   
+
     set <- function(y){
-        x <<- y
+        x <<- y                   
         the_inv <<- NULL
     }
     get <- function(){x}  
@@ -18,7 +34,13 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## cacheSolve matrix takes argument x, which is the previous function ( you 
+## should assign it a name for simplicity like the "mymat" example below.
+## the function first checks if the inverse of the matrix has already been cached
+## if it has, the function skips the calculation and fetches the cached data
+## if the inverse has not been cached, the function gets the value of the matrix
+## and inverts it, and then caches the value of the inverse.
+## examples are below.
 
 cacheSolve <- function(x, ...) {
     the_inv <- x$getInverse()
